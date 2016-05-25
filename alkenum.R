@@ -16,8 +16,20 @@ digitsum <- function(x) {
 c10<-c9[sapply(c9,digitsum)==digsum]
 #First digit is the largest digit and not appearing elsewhere after the first digit.
 c11<-c10[unlist(lapply(strsplit(as.character(c10),""),function(x) x[1]==max(x) & !(x[1] %in% x[-1])))]
+#Generate regex command based on maximum edge vector value
+regex<-function(maxedgevec){
+it<-c()
+for (i in 2:(maxedgevec-1)){
+	it<-c(it,paste0("^.",i,"0{1,",(i-1),"}[^0]"))
+}
+it<-paste0(it,collapse="|")
+}
+#remove those compounds with regex
+c11<-c11[-grep(regex(maxedgevec),c11)]
 #Ensure that the number zero does not appear second except if the first digit = digsum.
-if(wordlength>6) c11<-c11[-grep("^.0",c11)]
+c11<-c11[-grep("^.0",c11)]
+#Reinsert the code corresponding to the specific "star" graph.
+if(maxedgevec==digsum) c(paste0(maxedgevec,paste(rep(0,maxedgevec),collapse=""),collapse=""),c11)
 #Ensure that the only entry beginning with 2 is the entry followed by wordlength-3 number 1s, or digsum-2 number 1s.
 c11<-as.character(sort(c(c11[!grepl("^2",c11)],c11[grepl(paste0("^21{",digsum-2,"}"),c11)]),decreasing=T))
 }
