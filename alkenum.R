@@ -20,7 +20,7 @@ c11<-c10[unlist(lapply(strsplit(as.character(c10),""),function(x) x[1]==max(x) &
 regex<-function(maxedgevec){
 it<-c()
 for (i in 2:(maxedgevec-1)){
-	it<-c(it,paste0("^.",i,"0{1,",(i-1),"}[^0]"))
+	it<-c(it,paste0("^.1+00+[^0]|^.1+0[^01]|^.1+0.+[^01]+|^.",i,"0{1,",(i-1),"}[^0]|^",j,i,"0{",i,"}0{1,",(j-1),"}[^0]"))
 }
 it<-paste0(it,collapse="|")
 }
