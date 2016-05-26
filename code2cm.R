@@ -1,4 +1,4 @@
-code2cm2<-function(c11,wordlength){
+code2cm<-function(c11,wordlength){
 c12<-lapply(strsplit(as.character(c11)," "),as.numeric)
 list1<-list()
 for(j in 1:length(c12)){
