@@ -2,7 +2,7 @@ isofilter<-function(b,a){
 b2<-b[!unlist(lapply(b,function(x) min(x)==0))]
 a2<-a[!unlist(lapply(b,function(x) min(x)==0))]
 #turn into igraph objects
-list1g<-lapply(b2[unlist(lapply(b2,is.matrix))],function(x) graph.edgelist(x,directed=F))
+list1g<-lapply(b2[unlist(lapply(b2,is.matrix))],function(x) graph.edgelist(x,directed=FALSE))
 #plot a selection if you wish
 #par(mfrow=c(3,3))
 #lapply(list1g,plot)
